@@ -14,7 +14,7 @@ SID_PAPP="spiffe://$TRUST_DOMAIN/papp"
 cd spire
 SPIRE_SRV=bin/spire-server
 SPIRE_AGT=bin/spire-agent
-$SPIRE_SRV healthcheck
+$SPIRE_SRV healthcheck 2>/dev/null
 [ $? -ne 0 ] && echo "SPIRE Server is not up! Starting up in background ..." && \
 				$SPIRE_SRV run -config conf/server/server.conf >spire-server.log 2>&1 &
 sleep 2
