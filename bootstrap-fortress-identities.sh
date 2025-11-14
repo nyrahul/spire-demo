@@ -6,10 +6,6 @@ UID_QC=$1
 UID_PAPP=$2
 
 TRUST_DOMAIN="fortress.org"
-nc -zv $TRUST_DOMAIN 8081 >/dev/null
-[ $? -ne 0 ] && echo "Unable to reach $TRUST_DOMAIN. Ensure that $TRUST_DOMAIN is mapped in /etc/hosts file." \
-	&& exit 1
-
 SID_GNDSTN="spiffe://$TRUST_DOMAIN/gndstation"
 SID_QC="spiffe://$TRUST_DOMAIN/qcontroller"
 SID_SAT1="spiffe://$TRUST_DOMAIN/satellite1"
@@ -24,6 +20,10 @@ $SPIRE_SRV healthcheck
 sleep 2
 $SPIRE_SRV healthcheck
 [ $? -ne 0 ] && echo "Unable to start up the SPIRE Server!" && exit 2
+
+nc -zv $TRUST_DOMAIN 8081 >/dev/null
+[ $? -ne 0 ] && echo "Unable to reach $TRUST_DOMAIN. Ensure that $TRUST_DOMAIN is mapped in /etc/hosts file." \
+	&& exit 1
 
 $SPIRE_SRV entry create \
 	-parentID $SID_GNDSTN \
