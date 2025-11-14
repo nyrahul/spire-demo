@@ -5,6 +5,8 @@
 SPIRE_SRV=spire/bin/spire-server
 SPIRE_AGT=spire/bin/spire-agent
 
+killall spire-server 2>/dev/null
+
 # Install SPIRE
 [ -d spire ] && echo "Deleting existing SPIRE installation ..." && rm -rf spire
 echo "Installing SPIRE ..."
