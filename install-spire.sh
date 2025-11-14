@@ -23,4 +23,6 @@ sed -i -e 's/example\.org/fortress\.org/g' \
 	   -e 's/server_address = "localhost"/server_address = "fortress.org"/g' \
 	   spire/conf/agent/agent.conf
 
+mkdir -p certs/server
+mkdir -p certs/client
 echo "SPIRE installed successfully."
